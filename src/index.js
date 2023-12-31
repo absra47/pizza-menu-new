@@ -49,7 +49,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -58,18 +58,52 @@ function App() {
 }
 
 function Header() {
-  const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
-  return <h1 style={style}>Fast React Pizza Co.</h1>;
+  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+  const style = {};
+
+  return (
+    <header className="header">
+      <h1 style={style}>Fast React Pizza Co.</h1>
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
+      {/* <Pizza
+        name="pizza spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={10}
+      />
+
+      <Pizza
+        name="pizza Funghi"
+        ingredients="Tomato,mushrooms"
+        photoName="pizzas/funghi.jpg"
+        price={12}
+      /> */}
+    </main>
+  );
+}
+function Pizza(props) {
+  console.log(props);
+  return (
+    <div className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}></img>
+      <li>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </li>
     </div>
   );
 }
@@ -85,17 +119,9 @@ function Footer() {
   // if (hour >= openHour && hour <= closedHour) alert("We are currently open");
   // else alert("sorry , We are closed");
   return (
-    <footer>{new Date().toLocaleTimeString()}.We are currently open</footer>
-  );
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="pizza spinaci"></img>
-      <h2>Pizza Spinaci</h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}.We are currently open
+    </footer>
   );
 }
 
